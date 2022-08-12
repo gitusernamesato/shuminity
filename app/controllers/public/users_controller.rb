@@ -1,8 +1,10 @@
 class Public::UsersController < ApplicationController
   def show
+    @user = User.find(params[:id])
   end
 
   def index
+    @users = User.all
   end
 
   def edit
@@ -10,4 +12,10 @@ class Public::UsersController < ApplicationController
 
   def confirm
   end
+  
+  private
+  def user_params
+    params.require(:user).permit(:is_deleted, :name, :email)
+  end
+
 end

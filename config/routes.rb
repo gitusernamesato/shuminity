@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     #     delete "/destroy_all" => "cart_items#destroy_all"
     #   end
     # end
-    
+
     # resources :orders, only: [:new, :create, :index, :show] do
     #   collection do
     #   post "confirm"
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     #   end
     # end
    end
-   
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
   }

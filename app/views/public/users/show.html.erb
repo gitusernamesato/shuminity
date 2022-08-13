@@ -1,2 +1,11 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<h4><%= @user.name %>さん [id:<%= @user.id %>]</h4>
+
+<h5>投稿一覧</h5>
+ <% @posts.each do |post| %>
+  <%= link_to post_path(post.id) do %>(写真)<%= post.title %><% end %>
+  <%= post.body %>
+  <%= post.created_at %>
+ <% end %>
+
+<h5>お気に入り</h5>
+<h5>参加グループ</h5>

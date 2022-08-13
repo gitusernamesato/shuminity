@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'posts/show'
-    get 'posts/edit'
-    get 'posts/index'
-  end
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -11,11 +6,13 @@ Rails.application.routes.draw do
    scope module: :public do
     root to: "homes#top"
     get "homes/about"
-
+    post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
     resources :users, except: [:destroy, :create] do
       get "confirm"
       patch "withdraw"
     end
+
+    resources :posts
 
 
     # resources :cart_items, only: [:index, :update, :destroy, :create] do

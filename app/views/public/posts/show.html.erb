@@ -1,2 +1,7 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+
+<h4>投稿詳細</h4>
+<%= @post.user.name %>
+<%= image_tag @post.get_image(50,50) %>
+<%= @post.title %>
+<%= @post.body %>
+<%= @post.created_at.strftime('%Y/%m/%d') %></br>

@@ -1,10 +1,13 @@
-<h4><%= @user.name %>さん [id:<%= @user.id %>]</h4>
+<h6><%= @user.name %>さん [id:<%= @user.id %>]</h6>
 
 <h5>投稿一覧</h5>
  <% @posts.each do |post| %>
-  <%= link_to post_path(post.id) do %>(写真)<%= post.title %><% end %>
+  <%= link_to post_path(post.id) do %>
+    <%= image_tag post.get_image(50,50) %>
+    <%= post.title %>
+  <% end %>
   <%= post.body %>
-  <%= post.created_at %>
+  <%= post.created_at.strftime('%Y/%m/%d') %></br>
  <% end %>
 
 <h5>お気に入り</h5>

@@ -12,7 +12,9 @@ Rails.application.routes.draw do
       patch "withdraw"
     end
 
-    resources :posts
+    resources :posts, except: [:new] do
+      resources :comments, only: [:create, :destroy]
+    end
 
 
     # resources :cart_items, only: [:index, :update, :destroy, :create] do

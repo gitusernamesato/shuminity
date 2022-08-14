@@ -5,3 +5,20 @@
 <%= @post.title %>
 <%= @post.body %>
 <%= @post.created_at.strftime('%Y/%m/%d') %></br>
+
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+     <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_field :comment, class: 'form-control', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する", class: 'btn btn-sm btn-success' %>
+  <% end %>
+</div>

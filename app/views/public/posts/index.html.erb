@@ -16,5 +16,5 @@
   <% end %>
   <%= post.body %>
   <%= post.created_at.strftime('%Y/%m/%d') %></br>
-   <p>コメント件数：<%= post.comments.count %></p>
+   <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>
  <% end %>

@@ -13,7 +13,6 @@ class Public::PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all
-    @tag_list = Tag.all
   end
   
   def create

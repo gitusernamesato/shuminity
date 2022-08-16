@@ -6,7 +6,9 @@
     <%= f.text_field :title, class: 'form-control', placeholder: "タイトル" %>
     <%= f.label :body, "紹介" %>
     <%= f.text_field :body, class: 'form-control', placeholder: "紹介" %>
-    <%= f.submit '新規登録', class: 'btn btn-sm btn-success' %>
+    <%= f.label"タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.text_field :tag, value: @tag_list, class:"form-control" %>
+    <%= f.submit '投稿', class: 'btn btn-sm btn-success' %>
   <% end %>
 <h4>投稿一覧</h4>
  <% @posts.each do |post| %>
@@ -14,6 +16,7 @@
     <%= image_tag post.get_image(50,50) %>
     <%= post.title %>
   <% end %>
+  <i class="fas fa-tag"></i><%= post.tags.map(&:tag).join(', ') %>
   <%= post.body %>
   <%= post.created_at.strftime('%Y/%m/%d') %></br>
    <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>

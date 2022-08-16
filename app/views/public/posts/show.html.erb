@@ -3,6 +3,10 @@
 <%= @post.user.name %>
 <%= image_tag @post.get_image(50,50) %>
 <%= @post.title %>
+<i class="fas fa-tag"></i>
+<% @post_tags.each do |tag| %>
+ <%=tag.tag %><%="(#{tag.posts.count})" %>
+<% end %>
 <%= @post.body %>
 <%= @post.created_at.strftime('%Y/%m/%d') %></br>
 

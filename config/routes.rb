@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
     resources :tags, only: [:show]
+    get "search"=>"searches#search"
     
     # resources :cart_items, only: [:index, :update, :destroy, :create] do
     #   collection do

@@ -15,8 +15,9 @@ Rails.application.routes.draw do
     resources :posts, except: [:new] do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
+      
     end
-
+    get "tag"=>"posts#tag"
 
     # resources :cart_items, only: [:index, :update, :destroy, :create] do
     #   collection do

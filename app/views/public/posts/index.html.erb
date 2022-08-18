@@ -10,6 +10,7 @@
     <%= f.text_field :tag, class:"form-control", placeholder: "タグ" %>
     <%= f.submit '投稿', class: 'btn btn-sm btn-success' %>
   <% end %>
+
 <h4>投稿一覧</h4>
  <% @posts.each do |post| %>
   <%= link_to post_path(post.id) do %>
@@ -17,9 +18,11 @@
     <%= post.title %>
   <% end %>
   <% post.tags.each do |tag| %>
-  <i class="fas fa-tag"></i>
-  <%= tag.tag %><%="(#{tag.posts.count})" %>
- <% end %>
+    <i class="fas fa-tag"></i>
+    <%= link_to tag_path(tag) do %>
+      <%= tag.tag %><%="(#{tag.posts.count})" %>
+    <% end %>
+  <% end %>
   <%= post.body %>
   <%= post.created_at.strftime('%Y/%m/%d') %></br>
    <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>

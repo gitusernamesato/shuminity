@@ -44,6 +44,12 @@ class Public::PostsController < ApplicationController
     end
   end
   
+  def tag
+    @tags = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts
+  end
+  
   private
   def post_params
     params.require(:post).permit(:title, :body, :image)

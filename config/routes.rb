@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'tags/show'
+  end
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -15,10 +18,9 @@ Rails.application.routes.draw do
     resources :posts, except: [:new] do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
-      
     end
-    get "tag"=>"posts#tag"
-
+    resources :tags, only: [:show]
+    
     # resources :cart_items, only: [:index, :update, :destroy, :create] do
     #   collection do
     #     delete "/destroy_all" => "cart_items#destroy_all"

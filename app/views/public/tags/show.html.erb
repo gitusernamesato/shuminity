@@ -1,11 +1,4 @@
-<h4><i class="fas fa-tag"></i><% @tag.tag %>の投稿</h4>
-
-<% @tags.tags.each do |tag| %>
-  <i class="fas fa-tag"></i>
-  <%= link_to tag_path(tag) do %>
-    <%= tag.tag %><%="(#{tag.posts.count})" %>
-  <% end %>
-<% end %>
+<h4><i class="fas fa-tag"></i><%= @tag.tag %>の投稿一覧</h4>
 <% @posts.each do |post| %>
   <%= link_to post_path(post.id) do %>
     <%= image_tag post.get_image(50,50) %>
@@ -21,3 +14,11 @@
   <%= post.created_at.strftime('%Y/%m/%d') %></br>
    <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>
  <% end %>
+ 
+<h4>タグ一覧</h4>
+<% @tags.each do |tag| %>
+  <i class="fas fa-tag"></i>
+  <%= link_to tag_path(tag) do %>
+    <%= tag.tag %><%="(#{tag.posts.count})" %>
+  <% end %>
+<% end %>

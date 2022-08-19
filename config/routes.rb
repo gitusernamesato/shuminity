@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'tags/show'
+  namespace :admin do
+    get 'users/show'
+    get 'users/index'
+    get 'users/edit'
   end
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -21,24 +23,17 @@ Rails.application.routes.draw do
     end
     resources :tags, only: [:show]
     get "search"=>"searches#search"
-    
-    # resources :cart_items, only: [:index, :update, :destroy, :create] do
-    #   collection do
-    #     delete "/destroy_all" => "cart_items#destroy_all"
-    #   end
-    # end
-
-    # resources :orders, only: [:new, :create, :index, :show] do
-    #   collection do
-    #   post "confirm"
-    #   get "thanks"
-    #   end
-    # end
    end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
   }
+  
+  namespace :admin do
+    root to: "homes#top"
+    resources :posts, only: [:show, :destroy]
+    resources :users, only: [:show, :index, :edit, :update]
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

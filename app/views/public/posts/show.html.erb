@@ -12,23 +12,25 @@
 <% end %>
 <%= @post.body %>
 <%= @post.created_at.strftime('%Y/%m/%d') %></br>
-
-<% if @post.favorited_by?(current_user) %>
-    <p>
+  <% if user_signed_in? %>
+    <% if @post.favorited_by?(current_user) %>
+      <p>
       <%= link_to post_favorites_path(@post), method: :delete do %>
         ♥<%= @post.favorites.count %> いいね
       <% end %>
-    </p>
+      </p>
     <% else %>
-    <p>
+      <p>
       <%= link_to post_favorites_path(@post), method: :post do %>
         ♡<%= @post.favorites.count %> いいね
       <% end %>
-    </p>
-<% end %>
+      </p>
+    <% end %>
+  <% else %>
+    <%= @post.favorites.count %> いいね
+  <% end %>
 
 <div>
-  <p>コメント件数：<%= @post.comments.count %></p>
   <% @post.comments.each do |comment| %>
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
@@ -38,8 +40,10 @@
   <% end %>
 </div>
 <div>
+<% if user_signed_in? %>
   <%= form_with model: [@post, @comment] do |f| %>
     <%= f.text_field :comment, class: 'form-control', placeholder: "コメントをここに" %>
     <%= f.submit "送信する", class: 'btn btn-sm btn-success' %>
   <% end %>
+<% end %>
 </div>

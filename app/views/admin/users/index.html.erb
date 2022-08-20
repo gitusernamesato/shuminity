@@ -1,0 +1,28 @@
+<h4>会員一覧</h4>
+<% @users.each do |user| %>
+  <div class="m-3 card">
+   <div class="card-header">
+     <%= link_to user_path(user) do %>
+       <%= user.name %>
+     <% end %>
+     投稿件数：<%= user.posts.count %>件
+   </div>
+   <div class="card-body">最新の投稿：
+     <% user.posts.last(1).each do |post| %>
+       <%= link_to admin_post_path(post) do %>
+         <%= image_tag post.get_image(50,50) %>
+         <%= post.title %>
+       <% end %>
+        <% post.tags.each do |tag| %>
+          <i class="fas fa-tag"></i>
+          <%= link_to tag_path(tag) do %>
+            <%= tag.tag %><%="(#{tag.posts.count})" %>
+          <% end %>
+        <% end %>
+          <%= post.body %>
+          <%= post.created_at.strftime('%Y/%m/%d') %></br>
+          <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>
+        <% end %>
+   </div>
+  </div>
+<% end %>

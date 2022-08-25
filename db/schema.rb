@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_09_035410) do
+ActiveRecord::Schema.define(version: 2022_08_09_132910) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_035410) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.text "message", default: "", null: false
+    t.text "message", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_035410) do
 
   create_table "groups", force: :cascade do |t|
     t.string "group_name", default: "", null: false
-    t.text "introduction", default: "", null: false
+    t.text "introduction", null: false
     t.integer "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_035410) do
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.string "title", default: "", null: false
-    t.text "body", default: "", null: false
+    t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["id"], name: "index_posts_on_id", unique: true
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_035410) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag", default: "", null: false
+    t.string "tagname", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

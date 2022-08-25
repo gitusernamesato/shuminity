@@ -1,0 +1,31 @@
+ <h4>グループ一覧</h4>
+    <table class='table'>
+    <thead>
+     <tr>
+      <th>グループ名</th>
+      <th>紹介文</th>
+      <th>メンバー数</th>
+      <th></th>
+     </tr>
+    </thead>
+    <tbody>
+    <% @groups.each do |group| %>
+     <tr>
+      <td>
+       <%= link_to group_path(group.id) do %>
+        <%= image_tag group.get_group_image(50,50) %>
+        <%= group.group_name %>
+       <% end %>
+      </td>
+      <td><%= group.introduction %></td>
+      <td>
+        <%= group.users.count %>
+      </td>
+      <td>
+        <% if group.owner_id == current_user.id %>
+         <%= link_to 'Edit', edit_group_path(group), class: "btn btn-sm btn-success" %>
+        <% end %>
+      </td>
+
+     </tr>
+    <% end %>

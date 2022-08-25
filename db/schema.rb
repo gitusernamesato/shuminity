@@ -52,22 +52,6 @@ ActiveRecord::Schema.define(version: 2022_08_09_035410) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "chat_groups", force: :cascade do |t|
-    t.integer "chat_id"
-    t.integer "group_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["chat_id"], name: "index_chat_groups_on_chat_id"
-    t.index ["group_id"], name: "index_chat_groups_on_group_id"
-    t.index ["id"], name: "index_chat_groups_on_id", unique: true
-  end
-
-  create_table "chats", force: :cascade do |t|
-    t.text "message", default: "", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
     t.integer "user_id"
@@ -150,8 +134,6 @@ ActiveRecord::Schema.define(version: 2022_08_09_035410) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "chat_groups", "chats"
-  add_foreign_key "chat_groups", "groups"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "posts"

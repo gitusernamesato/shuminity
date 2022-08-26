@@ -50,6 +50,6 @@ class Public::PostsController < ApplicationController
   end
   
   def tag_params
-    params.require(:tag).permit(:tag)
+    params.require(:tag).permit(:tagname)
   end
 end

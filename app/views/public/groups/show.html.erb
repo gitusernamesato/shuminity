@@ -6,7 +6,7 @@
         <th>グループ名</th>
         <th>紹介文</th>
         <th>メンバー</th>
-        <th></th> 
+        <th></th>
         <th></th>
        </tr>
       </thead>
@@ -35,3 +35,22 @@
        </tr>
       </tbody>
     </table>
+    <h4>メンバーの投稿</h4>
+     <% @group.users.each do |member| %>
+      <% member.posts.each do |post| %>
+       <%= post.user.name %>
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image(50,50) %>
+          <%= post.title %>
+        <% end %>
+        <% post.tags.each do |tag| %>
+          <i class="fas fa-tag"></i>
+          <%= link_to tag_path(tag) do %>
+            <%= tag.tag %><%="(#{tag.posts.count})" %>
+          <% end %>
+        <% end %>
+        <%= post.body %>
+        <%= post.created_at.strftime('%Y/%m/%d') %></br>
+         <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>
+      <% end %>
+    <% end %>

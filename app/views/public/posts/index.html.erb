@@ -6,8 +6,8 @@
     <%= f.text_field :title, class: 'form-control', placeholder: "タイトル" %>
     <%= f.label :body, "紹介" %>
     <%= f.text_field :body, class: 'form-control', placeholder: "紹介" %>
-    <%= f.label :tag, "タグ (,で区切ると複数タグ登録できます)" %>
-    <%= f.text_field :tag, class:"form-control", placeholder: "タグ" %>
+    <%= f.label :tagname, "タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.text_field :tagname, class:"form-control", placeholder: "タグ" %>
     <%= f.submit '投稿', class: 'btn btn-sm btn-success' %>
   <% end %>
 
@@ -20,7 +20,7 @@
   <% post.tags.each do |tag| %>
     <i class="fas fa-tag"></i>
     <%= link_to tag_path(tag) do %>
-      <%= tag.tag %><%="(#{tag.posts.count})" %>
+      <%= tag.tagname %><%="(#{tag.posts.count})" %>
     <% end %>
   <% end %>
   <%= post.body %>

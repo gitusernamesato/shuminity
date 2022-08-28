@@ -16,26 +16,24 @@ class Public::PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    tag_list = params[:post][:tag].split(',')
-    if @post.save
-     @post.save_tag(tag_list)
-     redirect_to posts_path
+    @post = current_user.posts.new(post_params)           
+    tag_list = params[:post][:tagname].split(",")  
+    if @post.save                                         
+      @post.save_tag(tag_list)                         
+      redirect_to posts_path          
     else
-     @posts = Post.all
-     render :index
+      redirect_to posts_path          
     end
   end
   
   def edit
     @post = Post.find(params[:id])
-    @tag_list=@post.tags.pluck(:tag).join(',')
+    @tag_list=@post.tags.pluck(:tagname).join(',')
   end
   
   def update
     @post = Post.find(params[:id])
-    tag_list=params[:post][:tag].split(',')
+    tag_list=params[:post][:tagname].split(',')
     if @post.update(post_params)
        @post.save_tag(tag_list)
        redirect_to post_path(@post.id),notice:'投稿完了しました:)'

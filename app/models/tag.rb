@@ -2,7 +2,7 @@ class Tag < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :posts,through: :post_tags
 
-  validates :tag, uniqueness: true, presence: true
+  validates :tagname, uniqueness: true, presence: true
 
   # 検索方法分岐
   def self.looks(search, word)

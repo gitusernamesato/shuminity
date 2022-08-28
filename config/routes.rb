@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
 
+=======
+  namespace :admin do
+    get 'users/show'
+    get 'users/index'
+    get 'users/edit'
+  end
+>>>>>>> admins
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -18,20 +26,26 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
     resources :tags, only: [:show]
-    
+
     get "search"=>"searches#search"
-    
+
     resources :groups do
       get "join" => "groups#join"
       get "leave" => "groups#leave"
       resources :chat_messages, only: [:index, :create, :destroy]
     end
-    
+
    end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
   }
+
+  namespace :admin do
+    root to: "homes#top"
+    resources :posts, only: [:show, :destroy]
+    resources :users, only: [:show, :index, :edit, :update]
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

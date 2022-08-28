@@ -2,10 +2,20 @@
 <% @users.each do |user| %>
   <div class="m-3 card">
    <div class="card-header">
-     <%= link_to user_path(user) do %>
+    <span class="mr-2">
+      ユーザー名：
+      <%= link_to admin_user_path(user) do %>
        <%= user.name %>
+      <% end %>
+    </span>
+    <span class="mr-2">投稿件数：<%= user.posts.count %>件</span>
+    <span>ステータス：
+     <% if user.is_deleted == false %>
+      <span class="text-success">有効</span>
+      <% else %>
+      <span class="text-danger">凍結</span>
      <% end %>
-     投稿件数：<%= user.posts.count %>件
+    </span>
    </div>
    <div class="card-body">最新の投稿：
      <% user.posts.last(1).each do |post| %>

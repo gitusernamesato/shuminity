@@ -1,2 +1,55 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<h4>投稿詳細</h4>
+  <% if @post.is_hidden == true %>
+    <h6 class="text-danger">この投稿は非公開状態です</h6>
+  <% else %>
+    <h6 class="text-info">この投稿はユーザーに公開されています</h6>
+  <% end %>
+    <%= form_with model: @post, url: admin_post_path, method: :patch, local: true do |f| %>
+      <div class="form-group">
+      <%= f.radio_button :is_hidden, :false %>
+      <%= f.label :"公開", class:"mr-2" %>
+      <%= f.radio_button :is_hidden, :true %>
+      <%= f.label :"非公開" %>
+      <%= f.submit "変更を保存", class: "btn btn-sm btn-success ml-2" %>
+      </div>
+    <% end %>
+    
+<%= @post.user.name %>
+<%= image_tag @post.get_image(50,50) %>
+<%= @post.title %>
+
+<% @post_tags.each do |tag| %>
+ <i class="fas fa-tag"></i>
+ <%= link_to tag_path(tag) do %>
+ <%= tag.tag %><%="(#{tag.posts.count})" %>
+ <% end %>
+<% end %>
+<%= @post.body %>
+<%= @post.created_at.strftime('%Y/%m/%d') %></br>
+  <% if user_signed_in? %>
+    <% if @post.favorited_by?(current_user) %>
+      <p>
+      <%= link_to post_favorites_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+      </p>
+    <% else %>
+      <p>
+      <%= link_to post_favorites_path(@post), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+      </p>
+    <% end %>
+  <% else %>
+    <%= @post.favorites.count %> いいね
+  <% end %>
+    
+<div>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+     <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>

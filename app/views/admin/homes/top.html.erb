@@ -1,6 +1,7 @@
 <h4>投稿一覧</h4>
  <% @posts.each do |post| %>
-  <%= link_to post_path(post.id) do %>
+  <%= link_to "#{post.user.name}", admin_user_path(post.user) %>
+  <%= link_to admin_post_path(post.id) do %>
     <%= image_tag post.get_image(50,50) %>
     <%= post.title %>
   <% end %>
@@ -12,5 +13,16 @@
   <% end %>
   <%= post.body %>
   <%= post.created_at.strftime('%Y/%m/%d') %></br>
-   <p>コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %></p>
+   <p>
+    <span>
+     コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %>
+    </span>
+    <span class="ml-3">公開状況：
+     <% if post.is_hidden == false %>
+      <span class="text-success">公開</span>
+     <% else %>
+      <span class="text-danger">非公開</span>
+     <% end %>
+    </span>
+   </p>
  <% end %>

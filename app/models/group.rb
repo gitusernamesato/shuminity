@@ -3,6 +3,7 @@ class Group < ApplicationRecord
 
   has_many :group_users, dependent: :destroy
   has_many :users, through: :group_users
+  has_many :chat_messages, dependent: :destroy
   
   def get_group_image(width, height)
     unless group_image.attached?

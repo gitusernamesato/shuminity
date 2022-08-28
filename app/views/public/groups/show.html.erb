@@ -1,5 +1,4 @@
-
-    <h2>グループ詳細</h2>
+    <h4>グループ詳細</h4>
     <table class='table'>
       <thead>
        <tr>
@@ -35,6 +34,13 @@
        </tr>
       </tbody>
     </table>
+    <div class="mb-3">
+     <% if @group.users.include?(current_user) %>
+       <%= @group.group_name %>のメンバーとチャットをする => <%= link_to 'chat room', group_chat_messages_path(@group), class: "btn btn-sm btn-primary" %>
+     <% else %>
+       <%= @group.group_name %>に参加すればメンバーとチャットができます！ => <%= link_to 'Join this group', group_join_path(@group), class: "btn btn-sm btn-success" %>
+     <% end %>
+    </div>
     <h4>メンバーの投稿</h4>
      <% @group.users.each do |member| %>
       <% member.posts.each do |post| %>

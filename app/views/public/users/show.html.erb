@@ -12,3 +12,36 @@
 
 <h5>お気に入り</h5>
 <h5>参加グループ</h5>
+<p class="ml-auto">新規グループの作成は<%= link_to "こちら", new_group_path %></p>
+<table class='table'>
+ <thead>
+   <tr>
+     <th>グループ名</th>
+     <th>紹介文</th>
+     <th>メンバー数</th>
+   </tr>
+ </thead>
+ <tbody>
+ <% @groups.each do |group| %>
+  <tr>
+    <td>
+      <%= link_to group_path(group.id) do %>
+      <%= image_tag group.get_group_image(50,50) %>
+      <%= group.group_name %>
+      <% end %>
+    </td>
+    <td>
+      <%= group.introduction %>
+    </td>
+    <td>
+      <%= group.users.count %>
+    </td>
+    <td>
+      <% if group.owner_id == current_user.id %>
+      <%= link_to 'Edit', edit_group_path(group), class: "btn btn-sm btn-success" %>
+      <% end %>
+    </td>
+  </tr>
+ <% end %>
+ </tbody>
+</table>

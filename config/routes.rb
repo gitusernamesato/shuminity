@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :groups do
       get "join" => "groups#join"
       get "leave" => "groups#leave"
+      resources :chat_messages, only: [:index, :create, :destroy]
     end
     
    end

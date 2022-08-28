@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
 
-=======
-  namespace :admin do
-    get 'users/show'
-    get 'users/index'
-    get 'users/edit'
-  end
->>>>>>> admins
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'

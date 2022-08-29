@@ -33,18 +33,16 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    tag_list=params[:post][:tagname].split(',')
     if @post.update(post_params)
-       @post.save_tag(tag_list)
-       redirect_to post_path(@post.id),notice:'投稿完了しました:)'
+      redirect_to post_path(@post)
     else
-      render:edit
+      redirect_to post_path(@post)
     end
   end
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :image)
+    params.require(:post).permit(:title, :body, :image, :is_hidden)
   end
 
   def tag_params

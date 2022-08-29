@@ -39,7 +39,7 @@ class Public::GroupsController < ApplicationController
   def destroy
     group = Group.find(params[:id])
     group.destroy
-    redirect_to group_path
+    redirect_to groups_path
   end
 
   def join

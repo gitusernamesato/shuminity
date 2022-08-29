@@ -6,6 +6,9 @@ class Post < ApplicationRecord
   has_many :tags,through: :post_tags
 
   has_one_attached :image
+  
+  validates :title, presence: true
+  validates :body, presence: true
 
   # image_tag post.getimage(w,h)で投稿画像の読み込み、サイズ調整
   def get_image(width, height)

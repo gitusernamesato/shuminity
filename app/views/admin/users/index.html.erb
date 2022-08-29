@@ -25,9 +25,7 @@
        <% end %>
         <% post.tags.each do |tag| %>
           <i class="fas fa-tag"></i>
-          <%= link_to tag_path(tag) do %>
-            <%= tag.tag %><%="(#{tag.posts.count})" %>
-          <% end %>
+            <%= tag.tagname %><%="(#{tag.posts.count})" %>
         <% end %>
           <%= post.body %>
           <%= post.created_at.strftime('%Y/%m/%d') %></br>

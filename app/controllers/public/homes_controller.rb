@@ -1,6 +1,5 @@
 class Public::HomesController < ApplicationController
-  before_action :authenticate_user!, except: [:top, :about, :guest_sign_in
-  ]
+  before_action :authenticate_user!, except: [:top, :about, :guest_sign_in]
   def top
   end
 

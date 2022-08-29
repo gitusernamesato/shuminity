@@ -1,9 +1,9 @@
 class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.where(is_hidden:"false").page(params[:page]).reverse_order.per(5)
+    @posts = @user.posts.where(is_hidden: false).page(params[:page]).reverse_order.per(5)
     @groups = @user.groups
-    @hidden_posts = @user.posts.where(is_hidden:"true").page(params[:page]).reverse_order.per(3)
+    @hidden_posts = @user.posts.where(is_hidden: true).page(params[:page]).reverse_order.per(3)
   end
 
   def index

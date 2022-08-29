@@ -12,6 +12,7 @@ class Admin::PostsController < ApplicationController
       redirect_to admin_post_path(@post)
     end
   end
+  
   private
   def post_params
     params.require(:post).permit(:is_hidden)

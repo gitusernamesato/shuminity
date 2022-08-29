@@ -1,3 +1,27 @@
-<h1>Public::Homes#top</h1>
-<%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post %>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="text-center"><p class="h5"><strong>shuminity</strong>へようこそ！</br>
+このサイトは趣味を共有するコミュニティサイトです。</br>
+趣味の写真投稿を通じて仲間を探しませんか？</p>
+    <div class="m-2">
+      <h5>新着商品</h5>
+      <div class="row">
+        <% @posts.each do |post| %>
+          <div class="mx-3 card" style="width: 12rem;">
+            <div class="img mx-auto mt-2">
+              <%= image_tag post.image, :size=> "150", class:"card-img-top" %>
+            </div>
+            <div class="card-body">
+              <div class="card-title"><%= post.title %></div>
+              <div class="card-text text-truncate"><%= post.body %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+<% if user_signed_in? %>
+<%= link_to "投稿画面へ進む", posts_path, class:"btn btn-lg btn-primary" %>
+<% else %>
+  <p><%= link_to "新規登録", new_user_registration_path, class:"btn btn-success w-50" %></p>
+  <p><%= link_to "ログイン", new_user_session_path, class:"btn btn-info w-50" %></p>
+  <p><%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post ,class:"btn btn-secondary w-50" %></p>
+<% end %>
+</div>

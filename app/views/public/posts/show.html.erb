@@ -17,36 +17,52 @@
 　　<% end %>
 <% end %>
 
-<%= @post.user.name %>
-<%= image_tag @post.get_image(50,50) %>
-<%= @post.title %>
-
-<% @post_tags.each do |tag| %>
- <i class="fas fa-tag"></i>
- <%= link_to tag_path(tag) do %>
- <%= tag.tagname %><%="(#{tag.posts.count})" %>
- <% end %>
-<% end %>
-<%= @post.body %>
-<%= @post.created_at.strftime('%Y/%m/%d') %></br>
-  <% if user_signed_in? %>
-    <% if @post.favorited_by?(current_user) %>
-      <p>
-      <%= link_to post_favorites_path(@post), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
+<div class="card">
+  <div class="card-header">
+    <span>
+      投稿者：<%= link_to user_path(@post.user) do %>
+                <%= @post.user.name %>
+              <% end %>
+    </span>
+    <span class="ml-3">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></span>
+  </div>
+  <div>
+    <%= image_tag @post.image, class:"card-img-top" %>
+  </div>
+  <h4 class="card-title px-2 mb-0">
+    <%= @post.title %>
+  </h4>
+  <div class="card-body p-2">
+    <p class="small">
+      <% @post_tags.each do |tag| %>
+      <i class="fas fa-tag"></i>
+      <%= link_to tag_path(tag) do %>
+        <%= tag.tagname %><%="(#{tag.posts.count})" %>
       <% end %>
-      </p>
+      <% end %>
+    </p>
+    <span><%= @post.body %></span>
+  </div>
+  <div class="card-footer">
+    <% if user_signed_in? %>
+      <% if @post.favorited_by?(current_user) %>
+        <p>
+        <%= link_to post_favorites_path(@post), method: :delete do %>
+          ♥<%= @post.favorites.count %> いいね
+        <% end %>
+        </p>
+      <% else %>
+        <p>
+        <%= link_to post_favorites_path(@post), method: :post do %>
+          ♡<%= @post.favorites.count %> いいね
+        <% end %>
+        </p>
+      <% end %>
     <% else %>
-      <p>
-      <%= link_to post_favorites_path(@post), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
-      <% end %>
-      </p>
+      <%= @post.favorites.count %> いいね
     <% end %>
-  <% else %>
-    <%= @post.favorites.count %> いいね
-  <% end %>
-
+    </div>
+  </div>
 <div>
   <% @post.comments.each do |comment| %>
     <%= comment.user.name %>
@@ -56,11 +72,11 @@
     <% end %>
   <% end %>
 </div>
-<div>
+<div class="mt-3">
 <% if user_signed_in? %>
   <%= form_with model: [@post, @comment] do |f| %>
     <%= f.text_field :comment, class: 'form-control', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する", class: 'btn btn-sm btn-success' %>
+    <%= f.submit "送信する", class: 'btn btn-sm btn-success mt-3' %>
   <% end %>
 <% end %>
 </div>

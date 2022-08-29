@@ -7,13 +7,13 @@ class Tag < ApplicationRecord
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
-      @Tag = Tag.where("tag LIKE?", "#{word}")
+      @Tag = Tag.where("tagname LIKE?", "#{word}")
     elsif search == "forward_match"
-      @Tag = Tag.where("tag LIKE?","#{word}%")
+      @Tag = Tag.where("tagname LIKE?","#{word}%")
     elsif search == "backward_match"
-      @Tag = Tag.where("tag LIKE?","%#{word}")
+      @Tag = Tag.where("tagname LIKE?","%#{word}")
     elsif search == "partial_match"
-      @Tag = Tag.where("tag LIKE?","%#{word}%")
+      @Tag = Tag.where("tagname LIKE?","%#{word}%")
     else
       @Tag = Tag.all
     end

@@ -7,7 +7,7 @@
 <% @post_tags.each do |tag| %>
  <i class="fas fa-tag"></i>
  <%= link_to tag_path(tag) do %>
- <%= tag.tag %><%="(#{tag.posts.count})" %>
+ <%= tag.tagname %><%="(#{tag.posts.count})" %>
  <% end %>
 <% end %>
 <%= @post.body %>

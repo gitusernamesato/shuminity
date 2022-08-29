@@ -1,18 +1,17 @@
 <h6><%= @user.name %>さん [id:<%= @user.id %>]</h6>
 
-<h5>投稿一覧</h5>
- <% @posts.each do |post| %>
-  <%= link_to post_path(post.id) do %>
-    <%= image_tag post.get_image(50,50) %>
-    <%= post.title %>
-  <% end %>
-  <%= post.body %>
-  <%= post.created_at.strftime('%Y/%m/%d') %></br>
- <% end %>
+<h5 class="my-3">投稿一覧</h5>
+<%= render 'public/shared/list', posts: @posts %>
 
-<h5>お気に入り</h5>
-<h5>参加グループ</h5>
-<p class="ml-auto">新規グループの作成は<%= link_to "こちら", new_group_path %></p>
+<% if @user == current_user %>
+<h5 class="my-3">非公開の投稿一覧</h5>
+<%= render 'public/shared/list', posts: @hidden_posts %>
+<% end %>
+
+<h5 class="mt-3">参加グループ</h5>
+<% if @user == current_user %>
+  <p class="ml-auto">新規グループの作成は<%= link_to "こちら", new_group_path %></p>
+<% end %>
 <table class='table'>
  <thead>
    <tr>

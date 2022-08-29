@@ -15,17 +15,8 @@
       </div>
     <% end %>
 <h5>投稿一覧</h5>
- <% @posts.each do |post| %>
-  <%= link_to admin_post_path(post.id) do %>
-    <%= image_tag post.get_image(50,50) %>
-    <%= post.title %>
-  <% end %>
-  <%= post.body %>
-  <%= post.created_at.strftime('%Y/%m/%d') %></br>
- <% end %>
-
-<h5>お気に入り</h5>
-<h5>参加グループ</h5>
+<%= render 'admin/shered/list', posts: @posts %>
+<h5 class="my-3">参加グループ</h5>
 <table class='table'>
  <thead>
    <tr>

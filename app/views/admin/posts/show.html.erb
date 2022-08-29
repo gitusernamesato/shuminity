@@ -14,40 +14,27 @@
       </div>
     <% end %>
     
-<%= @post.user.name %>
-<%= image_tag @post.get_image(50,50) %>
-<%= @post.title %>
-
-<% @post_tags.each do |tag| %>
- <i class="fas fa-tag"></i>
- <%= tag.tagname %><%="(#{tag.posts.count})" %>
-<% end %>
-<%= @post.body %>
-<%= @post.created_at.strftime('%Y/%m/%d') %></br>
-  <% if user_signed_in? %>
-    <% if @post.favorited_by?(current_user) %>
-      <p>
-      <%= link_to post_favorites_path(@post), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
+<div class="card">
+  <div class="card-header">
+    <span>投稿者：<%= @post.user.name %></span>
+    <span class="ml-3">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></span>
+  </div>
+  <div>
+    <%= image_tag @post.image, class:"card-img-top" %>
+  </div>
+  <h4 class="card-title px-2 mb-0">
+    <%= @post.title %>
+  </h4>
+  <div class="card-body p-2">
+    <p class="small">
+      <% @post_tags.each do |tag| %>
+      <i class="fas fa-tag"></i>
+      <%= tag.tagname %><%="(#{tag.posts.count})" %>
       <% end %>
-      </p>
-    <% else %>
-      <p>
-      <%= link_to post_favorites_path(@post), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
-      <% end %>
-      </p>
-    <% end %>
-  <% else %>
-    <%= @post.favorites.count %> いいね
-  <% end %>
-    
-<div>
-  <% @post.comments.each do |comment| %>
-    <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-    <% if comment.user == current_user %>
-     <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-    <% end %>
-  <% end %>
+    </p>
+    <span><%= @post.body %></span>
+  </div>
+  <div class="card-footer">
+    コメント：<%= @post.comments.count %> ／いいね：<%= @post.favorites.count %>
+  </div>
 </div>

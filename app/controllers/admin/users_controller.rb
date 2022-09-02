@@ -8,6 +8,9 @@ class Admin::UsersController < ApplicationController
   def index
     @users = User.all
   end
+  
+  def edit
+    @user = User.find(params[:id])
 
   def update
     @user = User.find(params[:id])

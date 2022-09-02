@@ -7,7 +7,7 @@ Rails.application.routes.draw do
    scope module: :public do
     root to: "homes#top"
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
-    resources :users, except: [:destroy, :create, :edit] do
+    resources :users, except: [:destroy, :create] do
       get "confirm"
       # patch "withdraw"
     end

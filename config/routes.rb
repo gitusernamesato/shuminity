@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
     resources :users, except: [:destroy, :create] do
       get "confirm"
-      # patch "withdraw"
+      patch "withdraw"
     end
 
     resources :posts, except: [:new] do

@@ -13,7 +13,7 @@ class Public::UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -21,28 +21,25 @@ class Public::UsersController < ApplicationController
     else
       render :edit
     end
-  end 
-  
-  def confirm
-    @user = User.find(params[:user_id])
   end
-  
+
+  def confirm
+    @user = current_user
+  end
+
   def withdraw
-     @user = User.find(params[:id])
-     @posts = @user.posts.all
-     @user.update(user_params)
-     if user_params[:is_deleted] == true
+     @posts = current_user.posts.all
+     current_user.update(is_deleted: true)
+     if current_user.is_deleted == true
         @posts.update_all(is_hidden: true)
-     else
-        @posts.update_all(is_hidden: false)
      end
      reset_session
      redirect_to root_path
   end
-  
+
   private
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :is_deleted)
   end
 
 end

@@ -1,5 +1,7 @@
 <h6><%= @user.name %>さん [id:<%= @user.id %>]</h6>
-
+<% if @user == current_user %>
+<div><%= link_to "会員情報の編集", edit_user_path(@user) %></div>
+<% end %>
 <h5 class="my-3">投稿一覧</h5>
 <%= render 'public/shared/list', posts: @posts %>
 

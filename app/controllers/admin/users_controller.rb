@@ -13,12 +13,12 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.all
     if @user.update(user_params)
-        if user_params[:is_deleted] ==  true
+       if @user.is_deleted == true
           @posts.update_all(is_hidden: true)
-        else
-          @posts.update_all(is_hidden: false)
-        end
-      redirect_to admin_user_path(@user)
+          redirect_to admin_user_path(@user)
+       elsif @user.is_deleted == false
+          redirect_to admin_users_path
+       end
     else
       redirect_to admin_user_path(@user)
     end

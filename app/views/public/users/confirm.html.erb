@@ -10,7 +10,7 @@
             <div class="no-delete"><%= link_to "退会しない", user_path(current_user), class: "btn btn-primary" %>&ensp;</div>
             <div class="delete">
             <% if user_signed_in? && current_user %>
-                <%= link_to "退会する", user_withdraw_path(@user), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+                <%= link_to "退会する", user_withdraw_path(current_user), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
             <% end %>
             </div>
         </div>

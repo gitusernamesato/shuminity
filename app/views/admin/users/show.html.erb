@@ -6,10 +6,10 @@
   <% end %>
     <%= form_with model: @user, url: admin_user_path, method: :patch, local: true do |f| %>
       <div class="form-group">
-      <%= f.radio_button :is_deleted, :false %>
-      <%= f.label :"有効", class:"mr-2" %>
-      <%= f.radio_button :is_deleted, :true %>
-      <%= f.label :"凍結" %>
+      <%= f.radio_button :is_deleted, false %>
+      <%= f.label :is_deleted, "有効", class: "mr-2" %>
+      <%= f.radio_button :is_deleted, true %>
+      <%= f.label :is_deleted, "凍結" %>
       <%= f.submit "変更を保存", class: "btn btn-sm btn-success ml-2" %>
       <p class="small">※凍結時にすべての投稿を非公開にします</p>
       </div>

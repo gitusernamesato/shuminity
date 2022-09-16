@@ -2,12 +2,12 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label "メールアドレス" %><br />
+    <%= f.label :email, "メールアドレス" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"mb-3" %>
   </div>
 
   <div class="field">
-    <%= f.label "パスワード" %><br />
+    <%= f.label :password, "パスワード" %><br />
     <%= f.password_field :password, autocomplete: "current-password", class:"mb-3" %>
   </div>
   <div class="actions">
@@ -16,3 +16,4 @@
 <% end %>
 <p class="text-danger"><%= flash[:error] %></p>
 <%= render "public/shared/links" %>
+<div>管理者ログインは<%= link_to "こちら", admin_session_path %></div>

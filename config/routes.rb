@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
 
     resources :posts, except: [:new] do
+      patch "status_update"
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end

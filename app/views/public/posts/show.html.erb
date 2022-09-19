@@ -6,15 +6,16 @@
   <% else %>
     <h6 class="text-info">この投稿はユーザーに公開されています</h6>
   <% end %>
-    <%= form_with model: @post, url: post_path, method: :patch, local: true do |f| %>
-      <div class="form-group">
+    <%= form_with model: @post, url: post_status_update_path(@post), method: :patch, local: true do |f| %>
+      <div>
       <%= f.radio_button :is_hidden, :false %>
       <%= f.label :"公開", class:"mr-2" %>
       <%= f.radio_button :is_hidden, :true %>
       <%= f.label :"非公開" %>
-      <%= f.submit "変更を保存", class: "btn btn-sm btn-success ml-2" %>
+      <%= f.submit "変更を保存", class:"btn btn-sm btn-success ml-2" %>
       </div>
 　　<% end %>
+　　<%= link_to "投稿を編集", edit_post_path, class:"btn btn-sm btn-info mb-3 mr-4" %><%= link_to "投稿を削除", post_path,method: :delete, data: { confirm: '本当に削除しますか？' }, class:"btn btn-sm btn-danger mb-3" %>
 <% end %>
 
 <div class="card">

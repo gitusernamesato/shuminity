@@ -7,9 +7,6 @@ class Public::PostsController < ApplicationController
     @post_tags = @post.tags
   end
 
-  def edit
-  end
-
   def index
     @post = Post.new
     @posts = Post.where(is_hidden:"false").page(params[:page]).reverse_order.per(5)
@@ -28,16 +25,36 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @tag_list=@post.tags.pluck(:tagname).join(',')
+    @tag_list = @post.tags.pluck(:tagname).join(',')
   end
 
-  def update
-    @post = Post.find(params[:id])
+  def status_update
+    @post = Post.find(params[:post_id])
     if @post.update(post_params)
       redirect_to post_path(@post)
     else
       redirect_to post_path(@post)
     end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    tag_list = params[:post][:tagname].split(",")
+    if @post.update(post_params)
+      @old_tags = PostTag.where(post_id: @post.id)
+      @old_tags.each do |relation|
+        relation.delete
+      end
+      @post.save_tag(tag_list)
+      redirect_to post_path(@post)
+    else
+      redirect_to post_path(@post)
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id]).destroy
+    redirect_to user_path(current_user)
   end
 
   private

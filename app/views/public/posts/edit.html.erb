@@ -5,7 +5,7 @@
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, class: 'form-control', placeholder: "タイトル" %>
     <%= f.label :body, "紹介" %>
-    <%= f.text_field :body, class: 'form-control', placeholder: "紹介" %>
+    <%= f.text_area :body, class: 'form-control', placeholder: "紹介" %>
     <%= f.label :tagname, "タグ (,で区切ると複数タグ登録できます)" %>
     <%= f.text_field :tagname,value: @tag_list, class:"form-control", placeholder: "タグ" %>
     <%= f.submit '更新', class:'btn btn-sm btn-success mt-2' %>

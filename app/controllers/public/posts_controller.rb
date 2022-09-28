@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-
+ before_action :correct_user, only: [:edit, :status_update, :update, :destroy]
 
   def show
     @post = Post.find(params[:id])
@@ -64,5 +64,11 @@ class Public::PostsController < ApplicationController
 
   def tag_params
     params.require(:tag).permit(:tagname)
+  end
+
+  def correct_user
+    @post = Post.find(params[:id])
+    @user = @post.user
+    redirect_to posts_path unless @user == current_user
   end
 end

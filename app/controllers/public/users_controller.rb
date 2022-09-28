@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+ before_action :correct_user, only: [:edit, :update, :withdraw]
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.where(is_hidden: false).page(params[:page]).reverse_order.per(5)
@@ -42,4 +44,8 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :is_deleted)
   end
 
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to user_path(current_user) unless @user == current_user
+  end
 end

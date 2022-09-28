@@ -18,7 +18,7 @@
         <td><%= @group.introduction %></td>
         <td>
           <% @group.users.each do |member| %>
-           <%= member.name %></br>
+           <%= member.name %><br />
           <% end %>
         </td>
         <td>
@@ -65,7 +65,7 @@
             <% end %>
            <% end %>
           </span>
-           <%= post.body %></br>
+           <%= post.body %><br />
           <span class="small">
            コメント：<%= post.comments.count %>／いいね：<%= post.favorites.count %>
           </span>

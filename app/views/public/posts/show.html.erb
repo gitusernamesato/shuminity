@@ -67,10 +67,12 @@
 <div>
   <% @post.comments.each do |comment| %>
     <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <span class="mx-2"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+    <%= comment.comment %>
     <% if comment.user == current_user %>
      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
     <% end %>
+    <br />
   <% end %>
 </div>
 <div class="mt-3">

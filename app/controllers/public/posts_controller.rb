@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
- before_action :correct_user, only: [:edit, :status_update, :update, :destroy]
+ before_action :correct_user, only: [:edit, :update, :destroy]
 
   def show
     @post = Post.find(params[:id])
@@ -22,7 +22,7 @@ class Public::PostsController < ApplicationController
       @post.save_tag(tag_list)
       redirect_to posts_path
     else
-      redirect_to posts_path
+      render :new
     end
   end
 

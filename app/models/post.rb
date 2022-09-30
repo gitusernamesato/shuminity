@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :tags,through: :post_tags
 
   has_one_attached :image
-  
+
   validates :title, presence: true
   validates :body, presence: true
 
@@ -48,13 +48,13 @@ class Post < ApplicationRecord
    # 検索方法の分岐
   def self.looks(search, word)
     if search == "perfect_match"
-      @post = Post.where("title LIKE?", "#{word}")
+      @post = Post.where("title LIKE?", "#{word}").where(is_hidden: false)
     elsif search == "forward_match"
-      @post = Post.where("title LIKE?","#{word}%")
+      @post = Post.where("title LIKE?","#{word}%").where(is_hidden: false)
     elsif search == "backward_match"
-      @post = Post.where("title LIKE?","%#{word}")
+      @post = Post.where("title LIKE?","%#{word}").where(is_hidden: false)
     elsif search == "partial_match"
-      @post = Post.where("title LIKE?","%#{word}%")
+      @post = Post.where("title LIKE?","%#{word}%").where(is_hidden: false)
     else
       @post = Post.all
     end

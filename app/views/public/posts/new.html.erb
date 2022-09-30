@@ -1,4 +1,14 @@
 <h4>新規投稿</h4>
+  
+  <% if @post.errors.any? %>
+    <%= @post.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <%= form_with model:@post, url: posts_path, method: :post, local:true do |f| %>
     <%= f.label :画像 %>
     <%= f.file_field :image, class: 'form-control-file',accept: "image/*" %>

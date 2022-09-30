@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       patch "withdraw"
     end
 
-    resources :posts, except: [:new] do
+    resources :posts do
       patch "status_update"
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]

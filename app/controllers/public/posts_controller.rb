@@ -8,8 +8,11 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @post = Post.new
     @posts = Post.where(is_hidden:"false").page(params[:page]).reverse_order.per(5)
+  end
+  
+  def new
+    @post = Post.new
   end
 
   def create

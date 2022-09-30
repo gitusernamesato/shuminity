@@ -18,7 +18,7 @@
       </div>
     </div>
 <% if user_signed_in? %>
-<%= link_to "投稿画面へ進む", posts_path, class:"btn btn-lg btn-primary" %>
+<%= link_to "投稿画面へ進む", new_post_path, class:"btn btn-lg btn-primary" %>
 <% else %>
   <p><%= link_to "新規登録", new_user_registration_path, class:"btn btn-success w-50" %></p>
   <p><%= link_to "ログイン", new_user_session_path, class:"btn btn-info w-50" %></p>

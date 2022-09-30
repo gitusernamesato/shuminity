@@ -1,4 +1,6 @@
 class Public::GroupsController < ApplicationController
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @groups = Group.all
   end
@@ -32,7 +34,7 @@ class Public::GroupsController < ApplicationController
     if @group.update(group_params)
       redirect_to group_path(@group)
     else
-      redirect_to group_path(@group)
+      render :edit
     end
   end
 
@@ -58,5 +60,11 @@ class Public::GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:group_name, :introduction, :group_image)
+  end
+
+  def correct_user
+    @group = Group.find(params[:id])
+    @user = @group.owner_id
+    redirect_to groups_path unless @user == current_user.id
   end
 end

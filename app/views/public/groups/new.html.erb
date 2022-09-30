@@ -1,4 +1,14 @@
 <h4>グループ作成</h4>
+
+ <% if @group.errors.any? %>
+    <%= @group.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  
   <%= form_with model:@group,local:true do |f| %>
   <div class="form-group">
     <%= f.label :"グループ名" %>

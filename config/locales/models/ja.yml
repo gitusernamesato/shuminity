@@ -8,6 +8,7 @@ ja:
       user:
         name: ユーザー名
         email: メールアドレス
+        password: パスワード
       post:
         title: タイトル
         body: 紹介文

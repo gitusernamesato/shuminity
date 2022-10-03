@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      post: 投稿
+      group: グループ
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+      post:
+        title: タイトル
+        body: 紹介文
+      group:
+        group_name: グループ名
+        introduction: 紹介文

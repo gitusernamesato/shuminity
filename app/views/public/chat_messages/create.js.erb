@@ -1,0 +1,1 @@
+ $(".comment_<%= @group.id %>").html("<%= j(render 'public/chat_messages/messages', {messages: @messages, group: @group, message: @message} ) %>");

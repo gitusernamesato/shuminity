@@ -4,30 +4,4 @@
     <P>メンバーとチャットを始めましょう！</P>
   <% end %>
 </div>
-<div>
-  <% @messages.each do |message| %>
-  <% if message.user == current_user %>
-  <div class="text-right"><%= message.user.name %></div>  
-  <div class="message d-flex flex-row-reverse align-items-start">
-  <p class="message-text shadow-sm rounded p-2 me-2 mb-0 bg-info">
-  <%= message.message %>
-  </p>
-  </div>
-  <p class="small text-right"><%= message.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-  <% else %>
-  <%= message.user.name %>  
-  <div class="message d-flex flex-row align-items-start">
-  <p class="message-text shadow-sm rounded p-2 ms-2 mb-0 bg-light">
-  <%= message.message %>
-  </p>
-  </div>
-  <p class="small"><%= message.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-  <% end %>
-  <% end %>
-</div>
-<div>
-  <%= form_with model: [@group, @message] do |f| %>
-    <%= f.text_field :message %>
-    <%= f.submit "送信"%>
-  <% end %>
-</div>
+<div class='chat_<%= @group.id %>'><%= render 'public/chat_messages/messages', {messages: @messages, group: @group, message: @message} %></div>

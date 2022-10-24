@@ -13,7 +13,7 @@
       <%= f.submit "変更を保存", class: "btn btn-sm btn-success ml-2" %>
       </div>
     <% end %>
-    
+
 <div class="card">
   <div class="card-header">
     <span>投稿者：<%= @post.user.name %></span>
@@ -37,4 +37,14 @@
   <div class="card-footer">
     コメント：<%= @post.comments.count %> ／いいね：<%= @post.favorites.count %>
   </div>
+</div>
+
+<div class="mx-2 mt-2">
+  <h5>- コメント -</h5>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <span class="mx-2"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+    <%= comment.comment %>
+    <br />
+  <% end %>
 </div>
